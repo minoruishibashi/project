@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<script src="js/jquery-2.1.3.min.js"></script>
+<link rel="stylesheet" href="css/reset.css">
+<link rel="stylesheet" href="css/amefoot2.css">
+<title>アメフトゲーム</title>
+<script src="./js/jquery-2.1.3.min.js"></script>
+</head>
+
+<body>    
+<div class="startbutton">
+    <button>START</button>
+</div>
+    
+    <div>
+        <h1>Defence</h1>
+        <Ul class="defence">
+    
+            <li class="run_defence">
+                <img src="img/Run-d.jpeg" alt="run-defence">
+                <div class="rundbutton">
+                    <button>Run Defence</button>
+                </div>
+            </li>
+            <li class="pass_defence">
+                <img src="img/Pass-d.jpeg" alt="pass-defence">
+                <div class="passdbutton">
+                    <button>Pass Defence</button>
+                </div>
+            </li>
+            <li class="blitz_defence">
+                <img src="img/Blitz!!.jpeg" alt="blitz">
+                <div class="blitzbutton">
+                    <button>Blitz Defence</button>
+                </div>
+            </li>
+        </Ul>
+        <div class="defence_sign">
+            <p>Defenceのサインは？</p>
+        </div>
+    </div>
+    
+    <div>
+        <p>VS</p>
+    </div>
+
+    <div>
+        <h1>Offense</h1>
+        <Ul class="offense">
+            <li><img src="img/offense.jpeg" alt="offenseformation"></li>
+            <li class="offenseimage"><img src="img/Blitz.jpeg" alt="runimage"></li>
+            <div class="offensechoice">
+                <li>Offenseの攻撃は？</li>
+            </div>
+
+        </Ul>
+    </div>
+
+   <Ul class="remain">
+        <li> 残り</p></li>
+        <div class="rest">
+            <li>残りヤード</li>
+        </div>
+        <li>yard</li>
+    </Ul>
+
+
+
+<script>
+// Startボタンを押したらリセット、1st down 10
+$(".startbutton").on("click", function(){
+    $("#status").text("1st down 10");
+})
+
+// 守備のサインを決めてボタンをクリック。サインを表示
+const rundbutton = document.querySelector(".rundbutton");
+rundbutton.onclick = function(){
+    $(".defence_sign").html("Run Defence!!");
+}
+const passdbutton = document.querySelector(".passdbutton");
+passdbutton.onclick = function(){
+    $(".defence_sign").html("Pass Defence!!");
+}
+const blitzbutton = document.querySelector(".blitzbutton");
+blitzbutton.onclick = function(){
+    $(".defence_sign").html("Blitz!!!!");
+}
+
+// run defence vs run=0, vs pass=4, vs screen=3
+// pass defence vs run=4, vs pass=0, vs screen=3
+// blitz vs run=5, vs pass = 5, vs screen=-5
+$(".rundbutton").on("click", function(){
+    const num = Math.ceil(Math.random()*3);
+    let offensechoice ="";
+    let offenseimage="";
+    let gain_yard ="";
+    let rest ="";
+    if(num == 1){
+        offensechoice = "Run!! No gain 😀";
+        offenseimage ='<img src="img/run.jpeg" width="300px">';
+        gain_yard = 0;
+        rest = 10 - gain_yard;
+    }
+    if(num == 2){
+        offensechoice = "Pass成功！1st down 😭";
+        offenseimage ='<img src="img/pass.jpeg" width="300px">';
+        gain_yard = 0;
+        rest = 10 - gain_yard;
+    }
+    if(num == 3){
+        offensechoice = "Screen!! 5yd 前進 🙂";
+        offenseimage ='<img src="img/screen.jpeg" width="300px">';
+        gain_yard = 5;
+        rest = 10 - gain_yard;
+    }
+    console.log(offensechoice);
+    $(".offensechoice").html(offensechoice);
+    $(".offenseimage").html(offenseimage);
+    $(".rest").html(rest);
+})
+
+$(".passdbutton").on("click", function(){
+    const num = Math.ceil(Math.random()*3);
+    let offensechoice ="";
+    let offenseimage="";
+    let gain_yard ="";
+    let rest ="";
+    if(num == 1){
+        offensechoice = "Run!! 7yd 前進 😭";
+        offenseimage ='<img src="img/run.jpeg" width="300px">';
+        gain_yard = 7;
+        rest = 10 - gain_yard;
+    }
+    if(num == 2){
+        offensechoice = "Pass!! No gain 😀";
+        offenseimage ='<img src="img/pass.jpeg" width="300px">';
+        gain_yard = 0;
+        rest = 10 - gain_yard;
+    }
+    if(num == 3){
+        offensechoice = "Screen!! long gain! 😤";
+        offenseimage ='<img src="img/screen.jpeg" width="300px">';
+        gain_yard = 0;
+        rest = 10 - gain_yard;
+    }
+    console.log(offensechoice);
+    $(".offensechoice").html(offensechoice);
+    $(".offenseimage").html(offenseimage);
+    $(".rest").html(rest);
+})
+
+$(".blitzbutton").on("click", function(){
+    const num = Math.ceil(Math.random()*3);
+    let offensechoice ="";
+    let gain_yard ="";
+    let rest ="";
+    if(num == 1){
+        offensechoice = "Runがすれ違った😭、Long gain";
+        offenseimage ='<img src="img/run.jpeg" width="300px">';
+        gain_yard = 0;
+        rest = 10 - gain_yard;
+    }
+    if(num == 2){
+        offensechoice = "QBサック！！！！🤛";
+        offenseimage ='<img src="img/pass.jpeg" width="300px">';
+        gain_yard = -5;
+        rest = 10 - gain_yard;
+    }
+    if(num == 3){
+        offensechoice = "Screen!! Loss Tackle!!🔥";
+        offenseimage ='<img src="img/screen.jpeg" width="300px">';
+        gain_yard = -3;
+        rest = 10 - gain_yard;
+    }
+    console.log(offensechoice);
+    $(".offensechoice").html(offensechoice);
+    $(".offenseimage").html(offenseimage);
+    $(".rest").html(rest);
+})
+
+
+
+
+</script>
+
+</body>
+</html>
